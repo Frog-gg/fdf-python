@@ -1,6 +1,5 @@
-<img width="982" height="734" alt="screenshot png" src="https://github.com/user-attachments/assets/22ae9c84-4c72-4f87-8fe3-66bcd7fcf20a" /># FdF — каркасная 3D-модель карты высот
+# FdF — каркасная 3D-модель карты высот
 
-![Скриншот](docs/screenshot.png)
 <img width="982" height="734" alt="screenshot png" src="https://github.com/user-attachments/assets/42cd0578-184d-4dcc-9f76-3f752292e016" />
 
 
