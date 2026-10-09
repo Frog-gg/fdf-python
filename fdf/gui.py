@@ -56,24 +56,24 @@ class App:
                     if event.key == pygame.K_ESCAPE:
                         running = False
                         # Масштабирование (+ и -)
-                elif event.key == pygame.K_PLUS or event.key == pygame.K_EQUALS:
+                    elif event.key == pygame.K_EQUALS:
                         self.scale *= 1.1
-                elif event.key == pygame.K_MINUS:
+                    elif event.key == pygame.K_MINUS:
                         self.scale *= 0.9
-                # Сброс масштаба и сдвига (пробел)
-                elif event.key == pygame.K_SPACE:
+                    # Сброс масштаба и сдвига (пробел)
+                    elif event.key == pygame.K_SPACE:
                         self.scale = 1.0
                         self.offset_x = 0
                         self.offset_y = 0
                         self.camera.fit(self.map_object, self.window_width, self.window_height)
-                # Сдвиг карты (стрелки)
-                elif event.key == pygame.K_LEFT:
+                    # Сдвиг карты (стрелки)
+                    elif event.key == pygame.K_LEFT:
                         self.offset_x -= 20
-                elif event.key == pygame.K_RIGHT:
+                    elif event.key == pygame.K_RIGHT:
                         self.offset_x += 20
-                elif event.key == pygame.K_UP:
+                    elif event.key == pygame.K_UP:
                         self.offset_y -= 20
-                elif event.key == pygame.K_DOWN:
+                    elif event.key == pygame.K_DOWN:
                         self.offset_y += 20
                 elif event.type == pygame.VIDEORESIZE:
                     # Перерисовка при изменении размера окна
