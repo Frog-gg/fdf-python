@@ -1,6 +1,9 @@
 # FdF — каркасная 3D-модель карты высот
 
-![Скриншот](docs/screenshot.png)
+<img width="982" height="734" alt="screenshot png" src="https://github.com/user-attachments/assets/42cd0578-184d-4dcc-9f76-3f752292e016" />
+
+<img width="985" height="735" alt="2026-10-09_21-55-13" src="https://github.com/user-attachments/assets/198d0cfd-9282-4205-9215-75b323d838f9" />
+
 
 ## Описание
 Программа читает файл карты высот в формате `.fdf` и отображает каркасную 3D-модель поверхности в изометрической проекции.
