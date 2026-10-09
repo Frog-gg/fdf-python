@@ -48,25 +48,29 @@ class App:
     def run(self) -> int:
         """Главный цикл обработки событий. Возвращает код завершения."""
         running = True
+        is_dragging = False  # Флаг: зажата ли кнопка мыши
+        last_mouse_x = 0
+        last_mouse_y = 0
+        
         while running:
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     running = False
+                    
                 elif event.type == pygame.KEYDOWN:
                     if event.key == pygame.K_ESCAPE:
                         running = False
-                        # Масштабирование (+ и -)
                     elif event.key == pygame.K_EQUALS:
                         self.scale *= 1.1
                     elif event.key == pygame.K_MINUS:
                         self.scale *= 0.9
-                    # Сброс масштаба и сдвига (пробел)
                     elif event.key == pygame.K_SPACE:
                         self.scale = 1.0
                         self.offset_x = 0
                         self.offset_y = 0
+                        self.camera.yaw = 0.0
+                        self.camera.pitch = 0.0
                         self.camera.fit(self.map_object, self.window_width, self.window_height)
-                    # Сдвиг карты (стрелки)
                     elif event.key == pygame.K_LEFT:
                         self.offset_x -= 20
                     elif event.key == pygame.K_RIGHT:
@@ -75,18 +79,41 @@ class App:
                         self.offset_y -= 20
                     elif event.key == pygame.K_DOWN:
                         self.offset_y += 20
+                        
+                elif event.type == pygame.MOUSEBUTTONDOWN:
+                    if event.button == 1:  # Левая кнопка мыши
+                        is_dragging = True
+                        last_mouse_x = event.pos[0]
+                        last_mouse_y = event.pos[1]
+                        
+                elif event.type == pygame.MOUSEBUTTONUP:
+                    if event.button == 1:
+                        is_dragging = False
+                        
+                elif event.type == pygame.MOUSEMOTION:
+                    if is_dragging:
+                        # Вычисляем смещение мыши
+                        dx = event.pos[0] - last_mouse_x
+                        dy = event.pos[1] - last_mouse_y
+                        
+                        # Вращаем карту (чувствительность 0.01)
+                        self.camera.yaw += dx * 0.01
+                        self.camera.pitch += dy * 0.01
+                        
+                        # Запоминаем текущую позицию
+                        last_mouse_x = event.pos[0]
+                        last_mouse_y = event.pos[1]
+                        
                 elif event.type == pygame.VIDEORESIZE:
-                    # Перерисовка при изменении размера окна
                     self.window_width = event.w
                     self.window_height = event.h
                     self.screen = pygame.display.set_mode((self.window_width, self.window_height), pygame.RESIZABLE)
                     self.camera.fit(self.map_object, self.window_width, self.window_height)
-            
-            # Отрисовка
+
             self.screen.fill(BACKGROUND_COLOR)
             self.draw()
             pygame.display.flip()
-        
+
         pygame.quit()
         return 0
 
